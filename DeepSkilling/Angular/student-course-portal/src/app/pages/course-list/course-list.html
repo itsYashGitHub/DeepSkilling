@@ -1,0 +1,35 @@
+<section class="course-list">
+  <h2>Course Listing</h2>
+
+  <input
+    type="text"
+    placeholder="Search courses..."
+    [value]="searchTerm"
+    (input)="onSearchChange($any($event.target).value)"
+  />
+  <p>Searching for: {{ searchTerm }}</p>
+
+  @if (isLoading$ | async) {
+    <p>Loading courses...</p>
+  } @else {
+    @if ((courses$ | async)?.length) {
+      <div class="grid">
+        @for (course of (courses$ | async); track course.id) {
+          <div (click)="goToDetail(course.id)">
+            <app-course-card [course]="course" (enrollRequested)="onEnroll($event)"></app-course-card>
+          </div>
+        }
+      </div>
+    } @else {
+      <p>No courses available.</p>
+    }
+  }
+
+  @if (error$ | async; as error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (selectedCourseId) {
+    <p>Selected course ID: {{ selectedCourseId }}</p>
+  }
+</section>

@@ -1,0 +1,16 @@
+<h1>{{ portalName }}</h1>
+<p>Browse courses, manage enrollments, and track your academic progress all in one place.</p>
+
+<div class="stats">
+  <span>Courses Available: {{ coursesCount }}</span>
+  <span>Enrolled: {{ enrolledCount$ | async }}</span>
+  <span>GPA: 3.8</span>
+</div>
+
+<button [disabled]="!isPortalActive" (click)="onEnrollClick()">Enroll Now</button>
+@if (message) {
+  <p>{{ message }}</p>
+}
+
+<input [(ngModel)]="searchTerm" placeholder="Search..." />
+<p>Searching for: {{ searchTerm }}</p>

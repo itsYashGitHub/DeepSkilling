@@ -1,0 +1,8 @@
+<div class="notifications">
+  <button (click)="addSample()">Add Notification</button>
+  <ul>
+    @for (msg of messages; track $index) {
+      <li>{{ msg }}</li>
+    }
+  </ul>
+</div>
